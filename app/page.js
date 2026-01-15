@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <div className="flex items-center flex-col justify-center h-[44vh] gap-6">
 
-        <div className="text-4xl font-bold flex justify-center items-center gap-4 text-white">Buy Me A Donut <span><img width={80} src="tea.gif" alt="chai" /></span></div>
+        <div className="text-4xl font-bold flex justify-center items-center gap-4 text-white">Buy Me A Donut <span><img className="invertImg" width={80} src="tea.gif" alt="chai" /></span></div>
         <p className="text-white">A CrowdFunding Platform for Creators. Get funded by your fans and followers. Start now</p>
         <div className="flex gap-4">
           <button className='relative inline-flex h-12 overflow-hidden rounded-full p-px focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50'>
