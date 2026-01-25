@@ -1,5 +1,7 @@
 import React from 'react'
-import Dashboard_component from '@/Components/Dashboard'
+import Dashboard_component from '@/Components/UserInforForm'
+import mongoose from 'mongoose'
+
 
 const Dashboard = () => {
   return (

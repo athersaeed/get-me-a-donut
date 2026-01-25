@@ -16,7 +16,7 @@ const Navbar = () => {
         <nav className="flex justify-between items-center px-4 h-16 md:px-8 bg-blue-950 border-b border-neutral-800 text-white sticky top-0 backdrop-blur-md z-10">
             <div className="logo flex items-center gap-2 justify-center font-bold text-lg">
                 <span>
-                    <Link className='invertImg' href="/"><img width={40} src="tea.gif" alt="" /></Link>
+                    <Link href="/"><img className='invertImg' width={40} src="tea.gif" alt="" /></Link>
                 </span>
                 <Link href="/">GetMeADonut</Link>
             </div>
@@ -35,8 +35,8 @@ const Navbar = () => {
                             {dropdown && (
                                 <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                        <Link href="/profile" className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</Link>
-                                        <Link href="/profile" className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Your Page</Link>
+                                        <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</Link>
+                                        <Link href={`/${session.user.username}`} className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Your Page</Link>
                                         <Link href="/login"><button onClick={() => signOut()} className="block w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-gray-700 hover:text-white">Sign out</button></Link>
                                     </div>
                                 </div>
