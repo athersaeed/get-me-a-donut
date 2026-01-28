@@ -21,6 +21,10 @@ const PaymentPage = ({ username }) => {
     setPaymentForm({ ...paymentForm, [e.target.name]: e.target.value });
   };
 
+  const isInteger = (value) => {
+    return !isNaN(value) && value % 1 === 0;
+  };
+
   const handlePresetAmount = (amount) => {
     setPaymentForm({ ...paymentForm, amount: amount });
   };
@@ -52,17 +56,21 @@ const PaymentPage = ({ username }) => {
         />
         <div className="flex flex-col">
           <h1 className="font-bold text-2xl">{username}</h1>
-          <p className="text-sm text-gray-500">creating cats since 2022</p>
           <p className="text-sm text-gray-500">
-            100 followers <span className="font-bold text-lg ">.</span> 100
-            following
+            Let's help {username} get a donut
+          </p>
+          <p className="text-sm text-gray-500">
+            {payments.length} supporters.{" "}
+            <span className="font-bold text-lg ">.</span>{" "}
+            {payments.reduce((acc, payment) => acc + payment.amount, 0)} total
+            donations
           </p>
         </div>
       </div>
-      <div className="payment flex gap-4 w-[80%] mx-auto h-100">
-        <div className="supporters w-1/2 bg-slate-900 p-4 rounded-lg">
+      <div className="payment flex flex-col md:flex-row gap-4 w-full md:w-[80%] mx-auto mt-11">
+        <div className="supporters w-full md:w-1/2 bg-slate-900 p-10 rounded-lg">
           {/* Show list of all the supporters asa a leaderboard */}
-          <h2 className="text-2xl font-bold text-white">Supporters</h2>
+          <h2 className="text-2xl font-bold text-white my-5">Supporters</h2>
           <ul className="text-white mx-5 text-lg">
             {payments.length === 0 ? (
               <p className="text-center my-5">No payments found</p>
@@ -83,8 +91,8 @@ const PaymentPage = ({ username }) => {
           </ul>
         </div>
 
-        <div className="make-payment w-1/2 bg-slate-900 p-4 rounded-lg">
-          <h2 className="text-2xl font-bold text-white">Make Payment</h2>
+        <div className="make-payment w-full md:w-1/2 bg-slate-900 p-10 rounded-lg">
+          <h2 className="text-2xl font-bold text-white my-5">Make Payment</h2>
           <form
             action="/api/checkout_sessions"
             method="POST"
@@ -118,8 +126,18 @@ const PaymentPage = ({ username }) => {
 
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white px-4 py-2 my-2 rounded-lg hover:bg-blue-600 transition-all font-bold"
-              disabled={!paymentForm.amount || !paymentForm.name}
+              className="w-full bg-blue-500 text-white px-4 py-2 my-2 rounded-lg hover:bg-blue-600 transition-all font-bold disabled:bg-gray-500 disabled:cursor-not-allowed"
+              disabled={
+                !paymentForm.amount ||
+                paymentForm.name.trim().length < 3 ||
+                paymentForm.message.trim().length < 3 ||
+                paymentForm.amount < 1 ||
+                paymentForm.amount > 1000 ||
+                !paymentForm.amount.trim() ||
+                paymentForm.name.trim().length > 20 ||
+                paymentForm.message.trim().length > 60 ||
+                !isInteger(paymentForm.amount)
+              }
             >
               Pay
             </button>

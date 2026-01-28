@@ -12,3 +12,8 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+export const metadata = {
+    title: "Dashboard - Get Me A Donut",
+    description: "Dashboard to manage your account",
+}

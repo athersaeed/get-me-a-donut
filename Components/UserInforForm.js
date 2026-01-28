@@ -33,7 +33,25 @@ const UserInfoForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add logic to save the updated profile data to the backend here
+    e.preventDefault();
+
+    // Validate Stripe Keys
+    if (
+      form.stripePublishableKey &&
+      !form.stripePublishableKey.startsWith("pk_test_")
+    ) {
+      alert(
+        "Please use a Stripe Test Publishable Key (starts with pk_test_). Live keys are not supported.",
+      );
+      return;
+    }
+    if (form.stripeSecretKey && !form.stripeSecretKey.startsWith("sk_test_")) {
+      alert(
+        "Please use a Stripe Test Secret Key (starts with sk_test_). Live keys are not supported.",
+      );
+      return;
+    }
+
     let res = await updateProfile(form, session.user.username);
     if (res.error) {
       alert(res.error);
@@ -58,99 +76,141 @@ const UserInfoForm = () => {
       </h1>
       <form className="max-w-xl mx-auto" onSubmit={handleSubmit}>
         <div className="my-2">
-          <label htmlFor="name">Name</label>
-          <input
-            onChange={handleChange}
-            value={form.name ? form.name : ""}
-            name="name"
-            id="name"
-            type="text"
-            placeholder="Enter your name"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="name">
+              Name
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.name ? form.name : ""}
+              name="name"
+              id="name"
+              type="text"
+              placeholder="Enter your name"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <div className="my-2">
-          <label htmlFor="email">Email</label>
-          <input
-            onChange={handleChange}
-            value={form.email ? form.email : ""}
-            name="email"
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="email">
+              Email
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.email ? form.email : ""}
+              name="email"
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <div className="my-2">
-          <label htmlFor="username">Username</label>
-          <input
-            onChange={handleChange}
-            value={form.username ? form.username : ""}
-            name="username"
-            id="username"
-            type="text"
-            placeholder="Enter your username"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="username">
+              Username
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.username ? form.username : ""}
+              name="username"
+              id="username"
+              type="text"
+              placeholder="Enter your username"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <div className="my-2">
-          <label htmlFor="profilepic">Profile Photo</label>
-          <input
-            onChange={handleChange}
-            value={form.profilepic ? form.profilepic : ""}
-            name="profilepic"
-            id="profilepic"
-            type="text"
-            placeholder="Enter your profile photo"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="profilepic">
+              Profile Photo
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.profilepic ? form.profilepic : ""}
+              name="profilepic"
+              id="profilepic"
+              type="text"
+              placeholder="Enter your profile photo"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <div className="my-2">
-          <label htmlFor="coverpic">Cover Photo</label>
-          <input
-            onChange={handleChange}
-            value={form.coverpic ? form.coverpic : ""}
-            name="coverpic"
-            id="coverpic"
-            type="text"
-            placeholder="Enter your cover photo"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="coverpic">
+              Cover Photo
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.coverpic ? form.coverpic : ""}
+              name="coverpic"
+              id="coverpic"
+              type="text"
+              placeholder="Enter your cover photo"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <div className="my-2">
-          <label htmlFor="stripePublishableKey">STRPE PUBLISHABLE KEY</label>
-          <input
-            onChange={handleChange}
-            value={form.stripePublishableKey ? form.stripePublishableKey : ""}
-            name="stripePublishableKey"
-            id="stripePublishableKey"
-            type="text"
-            placeholder="Enter your STRIPE Publishable Key"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="stripePublishableKey">
+              STRPE PUBLISHABLE KEY
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.stripePublishableKey ? form.stripePublishableKey : ""}
+              name="stripePublishableKey"
+              id="stripePublishableKey"
+              type="text"
+              placeholder="Enter your STRIPE Test Publishable Key"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <div className="my-2">
-          <label htmlFor="stripeSecretKey">STRPE SECRET KEY</label>
-          <input
-            onChange={handleChange}
-            value={form.stripeSecretKey ? form.stripeSecretKey : ""}
-            name="stripeSecretKey"
-            id="stripeSecretKey"
-            type="text"
-            placeholder="Enter your STRIPE Secret Key"
-            className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
-          />
+          <div>
+            <label className="mx-2" htmlFor="stripeSecretKey">
+              STRPE SECRET KEY
+            </label>
+          </div>
+          <div className="w-[95%] mx-2">
+            <input
+              onChange={handleChange}
+              value={form.stripeSecretKey ? form.stripeSecretKey : ""}
+              name="stripeSecretKey"
+              id="stripeSecretKey"
+              type="text"
+              placeholder="Enter your STRIPE Test Secret Key"
+              className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
+            />
+          </div>
         </div>
 
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
+          className="mx-2 w-[95%] md:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
         >
           Update
         </button>
