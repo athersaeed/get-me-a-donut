@@ -10,8 +10,8 @@ const userSchema = new Schema({
     coverpic: { type: String },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    stripePublishableKey: { type: String, required: true },
-    stripeSecretKey: { type: String, required: true }
+    stripePublishableKey: { type: String },
+    stripeSecretKey: { type: String }
 })
 
 
