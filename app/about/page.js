@@ -16,7 +16,7 @@ const About = () => {
               className="invertImg"
             />
           </div>
-          <h1 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
+          <h1 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-linear  -to-r from-purple-400 to-pink-600">
             About Get Me A Donut
           </h1>
           <p className="mt-4 text-xl text-gray-300">

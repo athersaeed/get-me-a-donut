@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import mongoose from "mongoose";
 import User from "@/models/User";
 import Payment from "@/models/Payment";
@@ -11,10 +12,14 @@ const handler = NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      if (account.provider === "github") {
+      if (account.provider === "github" || account.provider === "google") {
         const client = await connectDB();
         const currentUser = await User.findOne({ email: user.email });
         if (!currentUser) {
@@ -34,6 +39,6 @@ const handler = NextAuth({
       return session;
     },
   },
-  });
+});
 
 export { handler as GET, handler as POST };

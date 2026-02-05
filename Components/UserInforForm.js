@@ -201,7 +201,7 @@ const UserInfoForm = () => {
               value={form.stripeSecretKey ? form.stripeSecretKey : ""}
               name="stripeSecretKey"
               id="stripeSecretKey"
-              type="text"
+              type="password"
               placeholder="Enter your STRIPE Test Secret Key"
               className="w-full p-2 rounded-lg my-2 border-2 border-gray-300"
             />
