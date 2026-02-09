@@ -170,6 +170,10 @@ const UserInfoForm = () => {
           </div>
         </div>
 
+        <p className="text-xs text-red-500 mx-2">
+          Warning: For educational purposes only. Do not enter real Stripe
+          production keys.
+        </p>
         <div className="my-2">
           <div>
             <label className="mx-2" htmlFor="stripePublishableKey">
